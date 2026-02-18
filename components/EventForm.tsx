@@ -34,6 +34,7 @@ const EventForm: React.FC = () => {
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [emailSent, setEmailSent] = useState<boolean | null>(null);
 
   // Clean up timer if component unmounts
   useEffect(() => {
@@ -114,8 +115,23 @@ const EventForm: React.FC = () => {
         }
 
         clearTimeout(stateTimer);
+        // Primary: DB saved. Secondary: email may or may not have been sent.
         setStatus("success");
-        toast.success("Registration successful! Check your email.");
+        // Show primary success toast for DB save
+        toast.success("Registration saved to database.");
+
+        // Show email status toast if backend provided it
+        if (typeof data.emailSent !== "undefined") {
+          setEmailSent(Boolean(data.emailSent));
+          if (data.emailSent) {
+            toast.success("Confirmation email sent to your address.");
+          } else {
+            const msg = data.emailError || "Failed to send confirmation email.";
+            toast.error(`Confirmation email not sent: ${msg}`);
+          }
+        } else {
+          setEmailSent(null);
+        }
       } catch (error: any) {
         clearTimeout(stateTimer);
         setStatus("idle");
@@ -136,7 +152,15 @@ const EventForm: React.FC = () => {
         <h3 className="success-title">Request Sent!</h3>
         <p className="success-desc">
           Thanks for reaching out, {formData.fullName.split(" ")[0]}.<br />
-          We've sent a confirmation email to <strong>{formData.email}</strong>.
+          {emailSent ? (
+            <>We've sent a confirmation email to <strong>{formData.email}</strong>.</>
+          ) : emailSent === false ? (
+            <>
+              Your registration is saved, but we couldn't send a confirmation email to <strong>{formData.email}</strong>.
+            </>
+          ) : (
+            <>Your registration is saved. You will receive a confirmation if email delivery is available.</>
+          )}
         </p>
         <button
           onClick={() => {
@@ -148,6 +172,7 @@ const EventForm: React.FC = () => {
               message: "",
               interest: "",
             });
+            setEmailSent(null);
           }}
           className="reset-btn"
         >
