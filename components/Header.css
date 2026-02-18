@@ -1,0 +1,154 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--district-border);
+  z-index: 1000;
+  height: 64px;
+}
+
+@media (min-width: 768px) {
+  .header {
+    height: 80px;
+  }
+}
+
+.header-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .header-container {
+    padding: 0 24px;
+  }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .header-left {
+    gap: 32px;
+  }
+}
+
+/* Logo Styles */
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  user-select: none;
+  cursor: pointer;
+}
+
+.logo-main {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: var(--district-black);
+}
+
+@media (min-width: 768px) {
+  .logo-main {
+    font-size: 30px;
+  }
+}
+
+.logo-sub {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #6b7280; /* gray-500 */
+  text-transform: uppercase;
+  margin-top: -2px;
+  margin-left: 2px;
+}
+
+@media (min-width: 768px) {
+  .logo-sub {
+    font-size: 12px;
+  }
+}
+
+/* Location Picker */
+.location-picker {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  border-left: 1px solid #d1d5db;
+  padding-left: 24px;
+  height: 32px;
+}
+
+@media (min-width: 640px) {
+  .location-picker {
+    display: flex;
+  }
+}
+
+.icon-circle {
+  padding: 6px;
+  background-color: #f9fafb; /* gray-50 */
+  border-radius: 50%;
+  color: var(--district-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--district-red);
+}
+
+.location-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.city-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--district-black);
+  line-height: 1.1;
+}
+
+.state-name {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.1;
+}
+
+/* Mobile Action */
+.mobile-login-btn {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--district-black);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.mobile-login-btn:hover {
+  color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .mobile-login-btn {
+    display: none;
+  }
+}
